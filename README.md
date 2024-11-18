@@ -56,4 +56,8 @@ This project automates attendance management by leveraging real-time face recogn
 - **Ridima Garg**
 
 
+<<<<<<< HEAD
 ---
+=======
+---
+>>>>>>> 927207a9e66f8f89a1de84d87567fac7a6016097

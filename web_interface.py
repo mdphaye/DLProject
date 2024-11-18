@@ -7,6 +7,7 @@ from PIL import Image
 import mysql.connector
 from mysql.connector import Error
 from scipy.spatial.distance import cosine
+import time
 
 # Initialize MTCNN and Inception Resnet Model
 device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
@@ -20,7 +21,7 @@ def load_embeddings_from_db():
         db_connection = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="MPhaye0509*",
+            password="MPhaye0509*",  # Replace with your MySQL password
             database="Attendance_System_DB"
         )
         cursor = db_connection.cursor()
@@ -58,7 +59,7 @@ def match_face(embedding, database_embeddings, threshold=0.6):
         return best_match
     return None
 
-# Real-time face recognition integrated with background
+# Real-time face recognition integrated with background and timer
 def real_time_face_recognition_with_background(database_embeddings):
     # Initialize webcam
     cap = cv2.VideoCapture(0)
@@ -77,10 +78,20 @@ def real_time_face_recognition_with_background(database_embeddings):
     box_x, box_y = 60, 160
     box_width, box_height = 630, 482
 
+    # Set timer duration in seconds
+    timer_duration = 5
+    start_time = time.time()
+
     while True:
         success, frame = cap.read()
         if not success:
             print("Failed to capture image from webcam.")
+            break
+
+        # Check timer
+        elapsed_time = time.time() - start_time
+        if elapsed_time > timer_duration:
+            print("Timer ended. Exiting...")
             break
 
         # Resize webcam frame to fit the background box
@@ -91,22 +102,21 @@ def real_time_face_recognition_with_background(database_embeddings):
         embedding = get_face_embedding_from_frame(frame)
         if embedding is not None:
             matched_name = match_face(embedding, database_embeddings)
-            # n = len(matched_name)
             if matched_name:
-                # for n in range(0,30):
                 # Display matched name on the background
-                cv2.putText(imgBackground, f"Matched: {matched_name}", (box_x + 10, box_y - 10), 
+                cv2.putText(imgBackground, f"Present: {matched_name}", (box_x + 100, box_y + 535), 
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 print(f"Attendance marked for: {matched_name}")
-            else:
-                cv2.putText(imgBackground, "No match found", (box_x + 10, box_y - 10), 
-                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+            # else:
+            #     cv2.putText(imgBackground, "No match found", (box_x + 100, box_y + 535), 
+            #                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
         # Display the final output
         cv2.imshow("Face Attendance", imgBackground)
 
         # Exit on pressing 'q'
         if cv2.waitKey(1) & 0xFF == ord('q'):
+            print("Exiting program.")
             break
 
     cap.release()

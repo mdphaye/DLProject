@@ -107,10 +107,9 @@ def real_time_face_recognition_with_background(database_embeddings):
                 cv2.putText(imgBackground, f"Present: {matched_name}", (box_x + 100, box_y + 535), 
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 print(f"Attendance marked for: {matched_name}")
-            # else:
-            #     cv2.putText(imgBackground, "No match found", (box_x + 100, box_y + 535), 
-            #                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-
+            else:
+                cv2.putText(imgBackground, "No match found", (box_x + 100, box_y + 535), 
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
         # Display the final output
         cv2.imshow("Face Attendance", imgBackground)
 

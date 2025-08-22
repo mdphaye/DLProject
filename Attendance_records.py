@@ -84,7 +84,7 @@ def get_face_embedding_from_frame(frame):
     return embedding.squeeze(0)
 
 # Match detected face embedding with database embeddings
-def match_face(embedding, database_embeddings, threshold=0.6):
+def match_face(embedding, database_embeddings, threshold=0.4):
     min_distance = float("inf")
     best_match = None
     for student_name, db_embedding in database_embeddings.items():
@@ -97,7 +97,7 @@ def match_face(embedding, database_embeddings, threshold=0.6):
     return None
 
 # Real-time face recognition integrated with background and attendance recording
-def real_time_face_recognition_with_attendance(database_embeddings, time_limit=60):  # Set time_limit in seconds
+def real_time_face_recognition_with_attendance(database_embeddings, time_limit=1000):  # Set time_limit in seconds
     # Initialize webcam
     cap = cv2.VideoCapture(0)
     cap.set(3, 627)  # Set width
@@ -166,4 +166,4 @@ if __name__ == "__main__":
     # Load database embeddings
     database_embeddings = load_embeddings_from_db()
     # Start real-time face recognition with attendance recording
-    real_time_face_recognition_with_attendance(database_embeddings, time_limit=7) 
+    real_time_face_recognition_with_attendance(database_embeddings, time_limit=1000) 

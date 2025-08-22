@@ -1,4 +1,4 @@
-# Real-Time Face Recognition Attendance System
+# Attendance System using Real-Time Face Recognition 
 
 ## Overview
 This project automates attendance management by leveraging real-time face recognition technology. Traditional attendance systems, whether manual or digital, often suffer from inefficiencies and inaccuracies. By integrating advanced facial recognition methods, this system offers a streamlined, contactless, and secure attendance process, ideal for educational institutions, workplaces, and other organizations.

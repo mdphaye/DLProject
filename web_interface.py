@@ -79,7 +79,7 @@ def real_time_face_recognition_with_background(database_embeddings):
     box_width, box_height = 630, 482
 
     # Set timer duration in seconds
-    timer_duration = 5
+    timer_duration = 50
     start_time = time.time()
 
     while True:

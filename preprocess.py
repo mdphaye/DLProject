@@ -46,11 +46,9 @@ def process_images_in_directory(input_dir, output_dir, target_size=(1920, 1080))
                 else:
                     print(f"Skipping saving for image: {image_path}")
 
-# **Update this with the path to your input dataset folder**
-input_directory = '/Users/mangalyaphaye/Desktop/DLProject/dataset'  # <-- Update this with your project path
+input_directory = '/Users/mangalyaphaye/Desktop/DLProject/dataset'  
 
-# **Update this with the path where you want to save processed images**
-output_directory = '/Users/mangalyaphaye/Desktop/DLProject/preprocessed_data'  # <-- Update this with your project path
+output_directory = '/Users/mangalyaphaye/Desktop/DLProject/preprocessed_data'  
 
 # Process the dataset
 process_images_in_directory(input_directory, output_directory)

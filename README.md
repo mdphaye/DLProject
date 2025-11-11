@@ -54,4 +54,3 @@ This project automates attendance management by leveraging real-time face recogn
 ## Contributors
 - **Mangalya D. Phaye**
 - **Ridima Garg**
-
